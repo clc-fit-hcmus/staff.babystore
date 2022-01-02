@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
@@ -21,6 +22,18 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+=======
+const createError = require('http-errors');
+const express = require('express');
+const path = require('path');
+const cookieParser = require('cookie-parser');
+const logger = require('morgan');
+
+const indexRouter = require('./routes/index');
+const usersRouter = require('./routes/users');
+const expressHbs =  require('express-handlebars');
+const app = express();
+>>>>>>> e9c86ad369230fdd8dd7b8b7973b634ea15227b5
 
 const hbs = expressHbs.create({
   defaultLayout: 'layout', 
@@ -34,14 +47,24 @@ const hbs = expressHbs.create({
       }
     },
     times: function(n, block) {
+<<<<<<< HEAD
       const accum = '';
       for(const i = 1; i < n + 1; ++i)
+=======
+      var accum = '';
+      for(var i = 1; i < n + 1; ++i)
+>>>>>>> e9c86ad369230fdd8dd7b8b7973b634ea15227b5
           accum += block.fn(i);
       return accum;
     },
     for: function(from, to, incr, block) {
+<<<<<<< HEAD
       const accum = '';
       for(const i = from; i < to; i += incr)
+=======
+      var accum = '';
+      for(var i = from; i < to; i += incr)
+>>>>>>> e9c86ad369230fdd8dd7b8b7973b634ea15227b5
           accum += block.fn(i);
       return accum;
     },
@@ -51,9 +74,28 @@ const hbs = expressHbs.create({
     }
   }
 });
+<<<<<<< HEAD
 app.engine('.hbs', hbs.engine);
 app.set('view engine', '.hbs');
 
+=======
+// view engine setup
+app.engine('.hbs', hbs.engine);
+app.set('view engine', '.hbs');
+
+app.use(logger('dev'));
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+app.use(cookieParser());
+app.use(express.static(path.join(__dirname, 'public')));
+
+app.use('/', indexRouter);
+app.use('/users', usersRouter);
+app.use('/order-history', indexRouter);
+app.use('/salary-history',indexRouter);
+app.use('/order-list',indexRouter);
+
+>>>>>>> e9c86ad369230fdd8dd7b8b7973b634ea15227b5
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
