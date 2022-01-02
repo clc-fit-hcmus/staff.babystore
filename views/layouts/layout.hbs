@@ -20,12 +20,13 @@
     {{>preloader}}
 
     <div id="main-wrapper">
-      {{>nav-header}}
+      {{#if login}}
+        {{>nav-header}}
 
-      {{>header}}
+        {{>header}}
 
-      {{>sidebar}}
-
+        {{>sidebar}}
+      {{/if}}
       {{{body}}}
     </div>
 

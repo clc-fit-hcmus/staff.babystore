@@ -1,13 +1,25 @@
+const csrf = require('csurf');
+const passport = require('passport');
+const { isLoggedIn, notLoggedIn } = require('../utils/login');
+
 var express = require('express');
 var router = express.Router();
+
+const csrfProtection = csrf();
+router.use(csrfProtection);
+
+/* GET home page. */
+router.get('/', notLoggedIn, function(req, res, next) {
+  const messages = req.flash('error');
+  res.render('index', { csrfToken: req.csrfToken(), messages: messages, hasErrors: messages.length > 0 });
+});
+
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express' });
 });
 
-<<<<<<< HEAD
-=======
 router.get('/order-history', function(req, res, next) {
   res.render('staff/order-history');
 });
@@ -16,9 +28,22 @@ router.get('/salary-history', function(req, res, next) {
   res.render('staff/salary-history');
 });
 
-router.get('/order-list', function(req, res, next) {
-  res.render('staff/order-list');
-});
+router.get('/logout', isLoggedIn, function(req, res, next) {
+  req.logout();
+  res.redirect('/');
+})
 
->>>>>>> e9c86ad369230fdd8dd7b8b7973b634ea15227b5
+router.get('/profile', isLoggedIn, function(req, res, next) {
+  const user = req.user.recordset[0];
+  res.render('user/profile', { user });
+
+})
+
+router.post('/', passport.authenticate('local.signin', {
+  successRedirect: '/profile',
+  failureRedirect: '/',
+  failureFlash: true
+}));
+
+
 module.exports = router;
