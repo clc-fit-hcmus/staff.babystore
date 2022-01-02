@@ -14,18 +14,8 @@ router.get('/', notLoggedIn, function(req, res, next) {
   res.render('index', { csrfToken: req.csrfToken(), messages: messages, hasErrors: messages.length > 0 });
 });
 
-
-/* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
-});
-
 router.get('/order-history', function(req, res, next) {
   res.render('staff/order-history');
-});
-
-router.get('/salary-history', function(req, res, next) {
-  res.render('staff/salary-history');
 });
 
 router.get('/logout', isLoggedIn, function(req, res, next) {

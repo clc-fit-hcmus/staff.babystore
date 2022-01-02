@@ -1,15 +1,17 @@
-const config ={
-    user : 'db',
+const config = {
+    user: 'db',
     password: '123',
-    server : 'DESKTOP-R6RI81O',
-    database: 'storeDB',
-    Options: {
-        trustedConnection: true,
+    server: 'LAPTOP-JQCHOUEQ',
+    database: 'StoreDB',
+    options: {
+        trustedconnection: true,
         enableArithAbort: true,
-        instancename: ''
+        instancename: '',
+        requestTimeout: 130000,
+        idleTimeoutMillis: 130000
     },
-    port: 51734,
+    port: 56310,
     trustServerCertificate: true
+};
 
-}
 module.exports = config;
